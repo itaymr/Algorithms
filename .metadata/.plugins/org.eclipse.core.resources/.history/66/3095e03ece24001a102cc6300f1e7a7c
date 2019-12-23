@@ -1,0 +1,60 @@
+
+public class LinkedListCycle {
+	
+	private LinkedListCycle next;
+	private LinkedListCycle prev;
+	private LinkedListCycle head;
+	
+	private int value;
+	private char data;
+	private String str;
+	private double dl;
+	
+	LinkedListCycle(char data)
+	{
+		this.data = data;
+		this.head = this;
+		this.next = this;
+		this.prev = this;
+	}
+	LinkedListCycle(char data, LinkedListCycle head, LinkedListCycle prev)
+	{
+		this.data = data;
+		this.next = head;
+		this.prev = prev;
+	}
+	
+	public void add(char data)
+	{
+		next = new LinkedListCycle(data, head, this);
+		
+	}
+	public void setNext(LinkedListCycle next)
+	{
+		this.next = next;
+	}
+	
+	public void setPrev(LinkedListCycle prev)
+	{
+		this.prev = prev;
+	}
+
+	
+	public char getData()
+	{
+		return data;
+	}
+	
+	public void setData(char data)
+	{
+		this.data = data;
+	}
+	
+	public LinkedListCycle getNext()
+	{
+		return next;
+	}
+	
+	
+	
+}

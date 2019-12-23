@@ -1,0 +1,25 @@
+
+public class Node {
+
+	
+	Node next;
+	char data;
+	
+	public Node(char data)
+	{
+		next = null;
+		this.data=data;
+	}
+	
+	
+	public Node getNext()
+	{
+		return next;
+	}
+	
+	public Node setNext(Node next)
+	{
+		this.next = next;
+	}
+}
+

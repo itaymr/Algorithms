@@ -1,0 +1,70 @@
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.concurrent.ThreadLocalRandom;
+/**
+ * This is an algorithm to solve the parking problem, whereas you need to count the number of cars in a circular parking lot.
+ * You can only move forwards and backwards, and each car could be marked.
+ * The solution is iterating through the circular list;
+ * first - mark your own car with a specific letter, go one steps forward
+ * if the next car is not marked, continue another step(n steps total)
+ * if after n steps a car is marked with a letter, change it to another
+ * go n steps backwards, this will be your starting position. 
+ * @author itaymeiri
+ *
+ */
+public class ParkingProblem {
+
+	
+	public static int CyclicLinkedListSize()
+	{
+		CyclicLinkedList cll = new CyclicLinkedList();
+
+		int size = ThreadLocalRandom.current().nextInt(10, 1000 + 1); // generates a random 
+		System.out.println("Expected size:" + size);
+
+		for(int i = 0; i < size; i++)
+		{
+			cll.addNode(new Node((char) ThreadLocalRandom.current().nextInt(10, 100 + 1))); // generates a node with random data
+		}
+		
+		
+		boolean foundStart = false;
+		int startingPoint = ThreadLocalRandom.current().nextInt(0, size);
+		int n = startingPoint;
+		System.out.println("n is:" + n);
+		
+		cll.get(n).setData('V');
+		while(!foundStart)
+		{
+			n++;
+			System.out.println("Working on n:" + n + " with data:" + cll.get(n).getData());
+			if(cll.get(n).getData() == 'V')
+			{
+				cll.get(n).setData('W');
+				for(int i = 0; i < n; i++)
+				{
+					cll.getPrev();
+				}
+				if(cll.getCurrent().getData() == 'W')
+				{
+					break;
+				}
+				else
+				{
+					n = startingPoint;
+				}
+			}
+		}
+		return n;
+		
+	}
+	
+
+	
+	public static void main(String args[])
+	{
+		
+		System.out.println("actual size: " + CyclicLinkedListSize());
+		
+	}
+}

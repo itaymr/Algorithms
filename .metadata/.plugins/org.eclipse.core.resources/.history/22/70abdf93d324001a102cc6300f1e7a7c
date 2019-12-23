@@ -1,0 +1,69 @@
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class CyclicLinkedList {
+
+	
+	LinkedList<Node> _nodes;
+	private int size;
+	private int index;
+	public CyclicLinkedList()
+	{
+		_nodes = new LinkedList();
+		size = 0;
+	}
+	
+	public void addNode(Node n)
+	{
+		if(_nodes.isEmpty())
+		{
+			_nodes.add(n);
+			n.setNext(n);
+			size++;
+			return;
+		}
+		
+		_nodes.getLast().setNext(n);
+		_nodes.add(n);
+		_nodes.getLast().setNext(_nodes.getFirst());
+		size++;
+	}
+	
+	
+	public Iterator<Node> iteretor()
+	{
+		return _nodes.iterator();
+	}
+	
+	public LinkedList<Node> myList()
+	{
+		return _nodes;
+	}
+	
+	// a, b, c
+	//get 0 => a
+	//get 1 => b
+	//get 2 => c
+	//get 3 => get 0 => a
+	// index % size
+	//get 4 => get 1 => b
+	
+	public Node get(int index)
+	{
+		return _nodes.get((index - 1) % size);
+	}
+	
+	
+	
+	public Node getNext()
+	{
+		
+		return this.get(index++);
+	}
+	
+	public Node getPrev()
+	{
+		return this.get(--index);
+	}
+	
+}
